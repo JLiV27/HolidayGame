@@ -13,6 +13,15 @@ public class Character {
     public int width = 50;
     public int height = 50;
     public boolean isAlive;
+    public Rectangle hitbox;
+    public boolean right = false;
+    public boolean left = false;
+    public boolean up = false;
+    public boolean down = false;
+
+    public Character(){
+        hitbox = new Rectangle(xpos, ypos, width, height);
+    }
 
     public Character(int paramXpos, int paramYpos, int paramDx, int paramDy, int paramWidth, int paramHeight){
         xpos = paramXpos;
@@ -21,6 +30,8 @@ public class Character {
         dy = paramDy;
         width = paramWidth;
         height = paramHeight;
+
+        hitbox = new Rectangle(xpos, ypos, width, height);
     }
 
     public void move() {
@@ -34,6 +45,7 @@ public class Character {
         if (xpos >= 1000 - width || xpos <= 0) {
             dx = -dx;
         }
+        hitbox = new Rectangle(xpos, ypos, width, height);
     }
 
     public void wrap(){
@@ -41,20 +53,21 @@ public class Character {
         ypos = ypos + dy;
 
         if(xpos >= 1000){
-            xpos = -width;
+            xpos = 1;
         }
 
-        if(xpos == 0){
-            xpos = 1000-width;
+        if(xpos <= 0){
+            xpos = 1000;
         }
 
         if(ypos >= 700){
-            ypos = -height;
+            ypos = 1;
         }
 
-        if(ypos == 0){
+        if(ypos <= 0){
             ypos = 700-height;
         }
+        hitbox = new Rectangle(xpos, ypos, width, height);
     }
 
         public void printInfo () {
